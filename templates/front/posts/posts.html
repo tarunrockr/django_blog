@@ -1,0 +1,86 @@
+{% extends 'front/master.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+  
+
+    <div class="container">
+      <br>
+      <div class="row">
+        {% for message in messages %}
+          <div class="alert {{ message.tags }} alert-dismissible alert-class alert_css" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message | safe }}
+          </div>
+        {% endfor %}
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-12">
+          <a href="{% url 'add_post' %}" class="btn btn-primary pull-right">Add Post <i class="fa fa-plus-circle"></i></a>
+        </div>
+      </div>
+      <br>
+
+       <div id="blog" class="row"> 
+
+          {% for post in posts %}
+           <div class="col-md-12 blogShort">
+               <h3>{{ post.title }} <a href="{% url 'edit_get' post.id %}" class="badge" style="font-size: 15px;" title="Edit Post"><i class="fa fa-pencil"></i></a></h3>
+               <!-- <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/guinnes-150x150.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail"> -->
+               <p>Date: {{ post.created_at|date:'d-m-Y H:i A' }}</p>
+               <article>
+                <p>{{ post.description|slice:":400" }}{% if post.description|length > 400 %}...{% endif %}
+                </p>
+               </article>
+               {% if post.description|length > 400 %}
+                <a class="btn btn-blog pull-right marginBottom10" href="{% url 'show_post' post.id %}">READ MORE</a> 
+               {% endif %}
+           </div>
+           {% endfor %}
+           
+         <div class="col-md-12 gap10"></div>
+       </div>
+
+       <div class="row pull-right">
+          {% if posts.has_other_pages %}
+            <div class="pagination pull-right">
+
+              {% if posts.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+              {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+              {% endif %}
+
+              {% for i in posts.paginator.page_range  %}
+                {% if users.number == i %}
+                  <li class="page-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% if posts.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+              {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+              {% endif %}
+
+            </div>
+          {% endif %}
+       </div>
+       <br><br>
+
+
+    </div>
+
+
+</div>
+<br><br>
+
+{% endblock content %}

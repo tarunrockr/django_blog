@@ -1,0 +1,123 @@
+{% extends 'front/master.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+  
+
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-12">
+          <a href="{% url 'home' %}" class="btn btn-primary pull-right"><i class="fa fa-arrow-circle-left"></i> Back</a>
+        </div>
+      </div>
+      <br>
+
+      <div class="container">
+        <div class="row">
+          {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible alert-class alert_css" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              {{ message | safe }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+     
+      <h3 class="form-header">Post Datail</h3>
+      <div class="container">
+
+
+
+
+
+
+        <div class="blog-single gray-bg">
+            <div class="container">
+                <div class="row align-items-start">
+                    <div class="col-lg-12 m-15px-tb">
+                        <article class="article">
+                            <!-- <div class="article-img">
+                                <img src="https://via.placeholder.com/800x350/87CEFA/000000" title="" alt="">
+                            </div> -->
+                            <div class="article-title">
+                                <!-- <h6><a href="#">Lifestyle</a></h6> -->
+                                <h2>{{ post_data.title }}</h2>
+                                <div class="media">
+                                    <div class="avatar">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" title="" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <label>User Name</label>
+                                        <span>{{ post_data.created_at|date:"d-m-Y H:i A" }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="article-content">
+                               {{ post_data.description }}
+                            </div>
+                            <!-- <div class="nav tag-cloud">
+                                <a href="#">Design</a>
+                                <a href="#">Development</a>
+                                <a href="#">Travel</a>
+                                <a href="#">Web Design</a>
+                                <a href="#">Marketing</a>
+                                <a href="#">Research</a>
+                                <a href="#">Managment</a>
+                            </div> -->
+                        </article>
+                        <div class="contact-form article-comment">
+                            <h4>Leave a Reply</h4>
+                            <form href="#" id="contact-form" method="POST">
+                              {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input name="Name" id="name" placeholder="Name *" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input name="Email" id="email" placeholder="Email *" class="form-control" type="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea name="message" id="message" placeholder="Your message *" rows="4" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="send">
+                                            <button class="px-btn theme"><span>Submit</span> <i class="arrow"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+       
+      </div>   
+    </div>
+
+
+</div>
+<br><br>
+
+{% endblock content %}

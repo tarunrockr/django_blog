@@ -1,0 +1,48 @@
+{% extends 'front/master.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+  
+
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-12">
+          <a href="{% url 'home' %}" class="btn btn-primary pull-right"><i class="fa fa-arrow-circle-left"></i> Back</a>
+        </div>
+      </div>
+      <br>
+
+      <div class="container">
+        <div class="row">
+          {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible alert-class alert_css" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              {{ message | safe }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+     
+      <h3 class="form-header">Add Post</h3>
+      <div class="container">
+        <form action="{% url 'add_post' %}" method="post">
+          {% csrf_token %}
+          {{ post_form.as_p }}
+          <button type="submit" class="btn btn-primary">Add <i class="fa fa-plus-circle"></i></button>
+        </form>
+      </div>
+           
+         
+    </div>
+
+
+</div>
+<br><br>
+
+{% endblock content %}

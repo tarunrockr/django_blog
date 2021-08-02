@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <title>Blog</title>  
+    <!-- Header  -->
+    {% include 'front/partials/header.html' %}  
+    {# block for individual page css #}
+    {% block css_block %}
+    {% endblock %}
+
+  </head>
+  <body>
+
+    <!-- Navbar  -->
+    {% include 'front/partials/navbar.html' %}
+
+    {# block for page content #}
+    {% block content %}
+    {% endblock %}
+
+    {# block for individual page js #}
+    {% block js_block %}
+    {% endblock %}
+
+    <!-- Footer  -->
+    {% include 'front/partials/footer.html' %}  
+
+    <!-- Footer js  -->
+    {% include 'front/partials/footer_js.html' %}  
+    
+  </body>
+</html>
